@@ -10,10 +10,16 @@ class StarWarsClient {
     return axios.get(url.join(this.baseUrl, path))
   }
 
+  extractResults (response) {
+    return response.data.results
+  }
+
   getFilms () {
-    return this.get('films').then(function (response) {
-      return response.data.results
-    })
+    return this.get('films').then(this.extractResults)
+  }
+
+  getPeople () {
+    return this.get('people').then(this.extractResults)
   }
 }
 
